@@ -4,20 +4,23 @@ import math
 import os
 import sys
 import xml.etree.ElementTree as et
-
+import utils
 
 OUTPUT_DIR = "100_stills"
 WIDTH = 240
 
 
 def main():
-	os.chdir(sys.argv[1])
+
+	tree = utils.open_project(sys.argv)
+	if tree == None:
+		return
+	
 	try:
 		os.mkdir(OUTPUT_DIR)
 	except OSError:
 		pass
 	
-	tree = et.parse("project.xml")
 	
 	movie = tree.getroot()
 	file_path = movie.attrib["path"]
@@ -47,7 +50,7 @@ def main():
 		img_small = cv.CreateImage((WIDTH, int( img.height * float(WIDTH)/img.width )), cv.IPL_DEPTH_8U, 3)
 		cv.Resize(img, img_small, cv.CV_INTER_CUBIC)
 		
-		cv.SaveImage(OUTPUT_DIR + "\\still_%07d.jpg" % (frame), img_small)
+		cv.SaveImage(os.path.join(OUTPUT_DIR,"still_%07d.jpg" % (frame)), img_small)
 		
 		for i in range(every_nth_frame-1):
 			cv.GrabFrame(cap)

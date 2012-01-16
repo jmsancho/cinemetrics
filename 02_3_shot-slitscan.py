@@ -5,19 +5,21 @@ import os
 import sys
 import xml.etree.ElementTree as et
 import time
-
+import utils
 
 OUTPUT_DIR_NAME = "shot_slitscans"
 
 
 def main():
-	os.chdir(sys.argv[1])
+
+	tree = utils.open_project(sys.argv)
+	if tree == None:
+		return
+
 	try:
 		os.mkdir(OUTPUT_DIR_NAME)
 	except OSError:
 		pass
-	
-	tree = et.parse("project.xml")
 	
 	movie = tree.getroot()
 	file_path = movie.attrib["path"]
@@ -79,7 +81,7 @@ def main():
 			
 		#return
 			
-		cv.SaveImage(OUTPUT_DIR_NAME + "\\shot_slitscan_%03d_%d.png" % (nr+1, start_frame), output_img)
+		cv.SaveImage(os.path.join(OUTPUT_DIR_NAME,"shot_slitscan_%03d_%d.png" % (nr+1, start_frame)), output_img)
 	
 	print "%.2f min" % ((time.time()-t) / 60)
 	#raw_input("- done -")

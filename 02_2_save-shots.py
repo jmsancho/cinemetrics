@@ -2,21 +2,24 @@
 import sys
 import os
 import os.path
-
+import glob
+import xml.etree.ElementTree as et
+import utils
 
 OUTPUT_DIR_NAME = "shot_snapshots"
 
 
 def main():
-	os.chdir(sys.argv[1])
-	
+
+	tree = utils.import_project(sys.argv)
+	if tree == None:
+		return
+
 	#frames = [os.path.splitext(file)[0] for file in os.listdir(os.getcwd() + "\\" + OUTPUT_DIR_NAME) if not os.path.isdir(file)]
-	import glob
-	frames = [os.path.splitext( os.path.basename(file) )[0] for file in glob.glob(OUTPUT_DIR_NAME + "\\*.png")] #os.getcwd() + "\\" +
-	frames = [int(frame) for frame in frames]
 	
-	import xml.etree.ElementTree as et
-	tree = et.parse("project.xml")
+	frames = [os.path.splitext( os.path.basename(file) )[0] for file in glob.glob(os.path.join(OUTPUT_DIR_NAME,"*.png"))] #os.getcwd() + "\\" +
+	frames = [int(frame) for frame in frames]
+
 	movie = tree.getroot()
 	# frame count 
 	movie.set("frames", str( frames[-1] - frames[0] ))

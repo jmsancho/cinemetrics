@@ -3,14 +3,18 @@ import sys
 import os
 import glob
 import cv
-
+import utils
 
 startframe = 0
 
 
 def main():
 	global startframe
-	os.chdir(sys.argv[1])
+
+	tree = utils.open_project(sys.argv)
+	if tree == None:
+		return
+
 	os.chdir("shot_slitscans")
 	
 	'''cv.NamedWindow("win", cv.CV_WINDOW_AUTOSIZE)
@@ -50,7 +54,8 @@ def main():
 		
 		cv.DestroyWindow(win_name)
 	
-	os.chdir("../../..")
+	src_dir = os.path.dirname(sys.argv[0])
+	os.chdir(src_dir)
 	os.system("python 02_2_save-shots.py \"" + sys.argv[1] + "\"")
 
 

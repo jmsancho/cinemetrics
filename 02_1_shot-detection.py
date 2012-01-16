@@ -2,11 +2,11 @@
 import sys
 import cv
 import time
-import winsound
-import win32api, win32con
+#import winsound
+#import win32api, win32con
 import os.path
 import xml.etree.ElementTree as et
-
+import utils
 
 DEBUG = False
 #DEBUG = True
@@ -20,22 +20,27 @@ def main():
 	BLACK_AND_WHITE = False
 	THRESHOLD = 0.48
 	BW_THRESHOLD = 0.4
-	
-	os.chdir(sys.argv[1])
-	try:
-		os.mkdir(OUTPUT_DIR_NAME)
-	except:
-		pass
+
+	if len(sys.argv) < 2:
+		print "usage: %s project_dir [bw]"%(sys.argv[0])
+		return
 	
 	if len(sys.argv) > 2:
 		if sys.argv[2] == "bw":
 			BLACK_AND_WHITE = True
 			THRESHOLD = BW_THRESHOLD
-			print "##########"
 			print " B/W MODE"
-			print "##########"
+
+			
+	tree = utils.open_project(sys.argv, False)
+	if tree == None:
+		return 
+
+	try:
+		os.mkdir(OUTPUT_DIR_NAME)
+	except:
+		pass
 	
-	tree = et.parse("project.xml")
 	movie = tree.getroot()
 	file_path = movie.attrib["path"]
 	cap = cv.CreateFileCapture(file_path)
@@ -60,7 +65,8 @@ def main():
 		img_orig = cv.QueryFrame(cap)
 		
 		if not img_orig: # eof
-			cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (frame_counter-1), prev_img)
+			output_file = os.path.join(OUTPUT_DIR_NAME, "%06d.png"% (frame_counter-1))
+			cv.SaveImage(output_file, prev_img)
 			"""movie.set("frames", str(frame_counter))
 			tree.write("project.xml")"""
 			break
@@ -69,7 +75,7 @@ def main():
 		cv.Resize(img_orig, img, cv.CV_INTER_AREA)
 		
 		if frame_counter == 0: # erster frame
-			cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (0), img)
+			cv.SaveImage(os.path.join(OUTPUT_DIR_NAME,"%06d.png" % (0)), img)
 			pixel_count = img.width * img.height
 			prev_img = cv.CreateImage(cv.GetSize(img), cv.IPL_DEPTH_8U, 3)
 			cv.Zero(prev_img)
@@ -122,11 +128,12 @@ def main():
 			if DEBUG:
 				if frame_counter % 2 == 0:
 					cv.ShowImage("win", img)
-				winsound.PlaySound(soundfile, winsound.SND_FILENAME|winsound.SND_ASYNC)
+				#winsound.PlaySound(soundfile, winsound.SND_FILENAME|winsound.SND_ASYNC)
 			print "%.3f" % ((0.4*d_color + 0.6*(1-d_hist))), "%.3f" % (d_color), "%.3f" % (1-d_hist), frame_counter
 			if DEBUG and DEBUG_INTERACTIVE:
-				if win32api.MessageBox(0, "cut?", "", win32con.MB_YESNO) == 6: #yes
-					cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (frame_counter), img)
+				#if win32api.MessageBox(0, "cut?", "", win32con.MB_YESNO) == 6: #yes
+				#	cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (frame_counter), img)
+				pass
 			else:
 				cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (frame_counter), img)
 		

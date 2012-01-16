@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys
 import os
@@ -9,13 +10,35 @@ PROJECTS_DIR_NAME = "projects"
 
 
 def main():
+	print sys.argv[0]
+	print os.path.split(sys.argv[0])
+
+	if len(sys.argv) < 2:
+		print "usage: ./%s movie_file"%sys.argv[0]
+		return
+	
+	curdir = os.curdir
+	
+	if not os.path.isfile(sys.argv[1]):
+		print "** Error: %s is not a valid filepath"%(sys.argv[1])
+		return
+
 	movie_path, movie_file = os.path.split(sys.argv[1])
+
 	os.chdir(os.path.split(sys.argv[0])[0])
+
+	# the project name is the movie filename without extension
 	project_dir = os.path.splitext(movie_file)[0]
-	try:
-		os.mkdir(os.path.join(PROJECTS_DIR_NAME, project_dir))
-	except:
-		pass
+
+	working_dir = os.path.join(PROJECTS_DIR_NAME, project_dir)
+
+	if not os.path.isdir(working_dir):
+		print "Creating the project directory %s"%(working_dir)
+		try:
+			os.makedirs(working_dir)
+		except:
+			print "** Error: failed to create the project directory"
+			return
 	
 	# generate project xml file:
 	root = et.Element("movie")
@@ -26,7 +49,7 @@ def main():
 	
 	# wrap and save
 	tree = et.ElementTree(root)
-	os.chdir(os.path.join(PROJECTS_DIR_NAME, project_dir))
+	os.chdir(working_dir)
 	tree.write("project.xml")
 	
 	print "don't forget to crop / remove any black borders!"
