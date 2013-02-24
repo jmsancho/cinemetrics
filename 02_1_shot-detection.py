@@ -8,9 +8,9 @@ import os.path
 import xml.etree.ElementTree as et
 import utils
 
-DEBUG = False
+DEBUG = True
 #DEBUG = True
-DEBUG_INTERACTIVE = False
+DEBUG_INTERACTIVE = True
 
 OUTPUT_DIR_NAME = "shot_snapshots"
 soundfile = "ton.wav"
@@ -43,7 +43,16 @@ def main():
 	
 	movie = tree.getroot()
 	file_path = movie.attrib["path"]
+	print "path: %s"%(file_path)
+	
+	if not os.path.isfile(file_path): 
+	  print "ERROR: file '%s' does not exist"%(file_path)
+	  return
+	
 	cap = cv.CreateFileCapture(file_path)
+	print "FPS: %s"%(cv.GetCaptureProperty(cap, cv.CV_CAP_PROP_FPS))
+	 
+	print "Frame width: %s"%(cv.GetCaptureProperty(cap, cv.CV_CAP_PROP_FRAME_WIDTH))
 	
 	if DEBUG:
 		cv.NamedWindow("win", cv.CV_WINDOW_AUTOSIZE)
@@ -135,7 +144,7 @@ def main():
 				#	cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (frame_counter), img)
 				pass
 			else:
-				cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (frame_counter), img)
+				cv.SaveImage(os.path.join(OUTPUT_DIR_NAME, "%06d.png" % (frame_counter)), img)
 		
 		cv.CalcHist([cv.GetImage(i) for i in planes], prev_hist)
 		cv.NormalizeHist(prev_hist, 1.0)
@@ -154,7 +163,7 @@ def main():
 				print "end", frame_counter, "cut at", cut_at
 				img_black = cv.CreateImage((img_orig.width/4, img_orig.height/4), cv.IPL_DEPTH_8U, 3)
 				cv.Set(img_black, cv.RGB(0, 255, 0))
-				cv.SaveImage(OUTPUT_DIR_NAME + "\\%06d.png" % (cut_at), img_black)
+				cv.SaveImage(os.path.join(OUTPUT_DIR_NAME, "%06d.png" % (cut_at)), img_black)
 			last_frame_black = False
 		
 		cv.Copy(img_hsv, prev_img)

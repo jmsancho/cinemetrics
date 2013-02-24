@@ -24,11 +24,14 @@ def main():
 		return
 
 	movie_path, movie_file = os.path.split(sys.argv[1])
-
-	os.chdir(os.path.split(sys.argv[0])[0])
+	print "movie path: %s, \nfile: %s"%(movie_path, movie_file)
+	
+	#if movie_path != ",":
+	#  os.chdir(os.path.split(movie_path)[0])
 
 	# the project name is the movie filename without extension
 	project_dir = os.path.splitext(movie_file)[0]
+	print "project dir is %s"%(project_dir)
 
 	working_dir = os.path.join(PROJECTS_DIR_NAME, project_dir)
 
