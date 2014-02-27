@@ -15,22 +15,22 @@ Requirements
  * opencv http://opencv.willowgarage.com/wiki/
  * ffmpeg
  * numpy
+ * scipy
  
  Debian/Ubuntu/Mint
  ------------------
- <pre>
-        apt-get install python-opencv ffmpeg build-essential checkinstall git cmake libfaac-dev libjack-jackd2-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libva-dev libvdpau-dev libvorbis-dev libx11-dev libxfixes-dev libxvidcore-dev texi2html yasm zlib1g-dev python-numpy
- </pre>
+ 
+```
+apt-get install python-opencv ffmpeg build-essential checkinstall git cmake libfaac-dev libjack-jackd2-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libva-dev libvdpau-dev libvorbis-dev libx11-dev libxfixes-dev libxvidcore-dev texi2html yasm zlib1g-dev python-numpy python-scipy
+```
 
-  * gstreamer
- 
-    <pre>
-        apt-get install libgstreamer0.10-0 libgstreamer0.10-dev gstreamer0.10-tools gstreamer0.10-plugins-base libgstreamer-plugins-base0.10-dev gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly gstreamer0.10-plugins-bad gstreamer0.10-ffmpeg
-    </pre>
-  * libjpg
- 
-    <pre>
-        apt-get install libjpeg8 libjpeg8-dev
-    </pre>    
+* gstreamer
+  ``` 
+  apt-get install libgstreamer0.10-0 libgstreamer0.10-dev gstreamer0.10-tools gstreamer0.10-plugins-base libgstreamer-plugins-base0.10-dev gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly gstreamer0.10-plugins-bad gstreamer0.10-ffmpeg
+  ```
+* libjpg
+  ```
+  apt-get install libjpeg8 libjpeg8-dev
+  ```
 
 ----------
