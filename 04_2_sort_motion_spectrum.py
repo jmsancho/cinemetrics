@@ -14,29 +14,29 @@ def main():
 		os.mkdir(OUTPUT_DIR_NAME)
 	except OSError:
 		pass
-	
+
 	#os.system("del klein\\*.png")
-	os.system("convert motion_*.png -adaptive-resize 500x500! " + OUTPUT_DIR_NAME + "\\motion_%02d.png")
-	
+	os.system("convert motion_*.png -adaptive-resize 500x500! " + os.path.join(OUTPUT_DIR_NAME, "motion_%02d.png"))
+
 	os.chdir(OUTPUT_DIR_NAME)
 	os.system("convert motion_*.png -append result.png")
-	
+
 	img = cv.LoadImageM("result.png")
 	values = []
-	
+
 	for y in range(img.rows):
 		value = cv.Get1D( cv.GetRow(img, y), 0)[0]
 		values.append(value)
-	
+
 	values.sort(reverse=True)
-	
+
 	output_img = cv.CreateImage(cv.GetSize(img), cv.IPL_DEPTH_8U, 3)
 	for y in range(img.rows):
 		for x in range(img.cols):
 			cv.Set2D(output_img, y, x, cv.RGB(values[y], values[y], values[y]))
-	
+
 	cv.SaveImage("result_sorted.png", output_img)
-	
+
 	raw_input("- done -")
 	return
 
