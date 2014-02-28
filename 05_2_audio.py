@@ -8,7 +8,6 @@ import numpy.fft
 import math
 import xml.etree.ElementTree as et
 import os
-import os.path
 
 from lib import smooth
 
@@ -23,16 +22,16 @@ from lib import smooth
 def main():
 	os.chdir(sys.argv[1])
 	f_out = open("smooth_audio.txt", "w")
-	
+
 	tree = et.parse("project.xml")
 	movie = tree.getroot()
 	path = movie.attrib["path"]
 	path = os.path.dirname(path)
 	fps = float( movie.attrib["fps"] )
-	
-	os.chdir(path)
+
+	# os.chdir(path)
 	file = os.path.join(path, "audio_trimmed.wav")
-	print file
+	print(file)
 
 	f = wave.open(file, "rb")
 	bit = f.getsampwidth() * 8
@@ -59,40 +58,40 @@ def main():
 	data_rms = numpy.array([])
 	for i in range(len(data) / chunk):
 		values = numpy.array( data[i*chunk : (i+1)*chunk] )
-		
+
 		# normalize [0, 1]
 		#values = values / 2**(bit-1)
 		values = values / float(max)
-		
+
 		#values = values * float(1) # why do I need that?
-		
+
 		# root mean square
 		values = numpy.power(values, 2)
 		rms = numpy.sqrt( numpy.mean(values) )
 		data_rms = numpy.append(data_rms, rms)
-		
+
 		# decibel
 		db = 20 * numpy.log10( (1e-20+rms) ) #/ float(max)
 		data_db = numpy.append(data_db, db)
 
 	#plt.ylim(-60, 0)
-	
+
 	#plt.plot( smooth(data_rms/numpy.max(data_rms), window_len=rate/(fps*2)), "k-" )
 	#plt.plot(smooth(data_db, window_len=rate/fps), "g-")
-	
+
 	smooth_db = 1 + smooth(data_db, window_len=rate/(fps*3)) / (60.0) # [0..1]
 	plt.ylim(0, 1)
 	plt.plot(smooth_db, "g-")
-	
+
 	for item in smooth_db:
 		if item < 0:
 			item = 0
 		f_out.write("%f\n" % float(item))
 	f_out.close()
-	
-	
+
+
 	#plt.plot(data_db)
-	
+
 	plt.show()
 
 
@@ -100,7 +99,7 @@ def main():
 #for i in range(len(data) / (rate*250)):
 #	plt.specgram(data[i*rate*250 : (i+1)*rate*250], Fs = rate, scale_by_freq=True, sides='default')
 #	plt.show()
-	
+
 
 
 
@@ -111,16 +110,16 @@ def main():
 	#sound_info = spf.readframes(-1)
 	sound_info = spf.readframes(1000000)
 	sound_info = numpy.fromstring(sound_info, 'Int16')
-	
+
 	f = spf.getframerate()
-	
+
 	plt.subplot(211)
 	plt.plot(sound_info)
 	plt.title('Wave from and spectrogram of %s' % sys.argv[1])
-	
+
 	plt.subplot(212)
 	spectrogram = plt.specgram(sound_info, Fs = f, scale_by_freq=True, sides='default')
-	
+
 	plt.show()
 	spf.close()
 
@@ -142,10 +141,10 @@ chunk_size = 10 #sample_rate / 25
 while True:
 	data_string = f.readframes(chunk_size)
 	unpacked = struct.unpack("%dB" % len(data_string), data_string)
-	
+
 	if not unpacked:
 		break
-	
+
 	chunk = numpy.array(unpacked)
 	#print chunk
 	chunk = pow(abs(chunk), 2)
@@ -153,7 +152,7 @@ while True:
 	#print rms
 	#db = 10 * math.log10(1e-20 + rms)
 	#print db
-	
+
 	volumes.append(rms)
 
 #plt.plot(volumes)
@@ -167,7 +166,7 @@ f.close()"""
 """
 values = []
 for i in range(len(data) / chunk):
-	x = 
+	x =
 	db = 20 * numpy.log10(1e-20 + numpy.absolute(x))
 	mean = numpy.mean(db)
 	values.append(mean)
