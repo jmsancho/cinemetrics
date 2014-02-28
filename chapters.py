@@ -85,7 +85,7 @@ def getFrames(stamp, fps):
     total_sec = (stamp.hour * 60 * 60) + (stamp.minute * 60) + stamp.second
     frames = (total_sec * fps) + frm
     # print(frames)
-    return frames
+    return int(frames)
 
 
 def printFrames(chapters, fps):
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert a eac3to chapter file to a list of frames.')
     parser.add_argument('chapter_file', metavar='chapter_file', type=str,
                        help='The chapter file from eac3to')
-    parser.add_argument('fps', metavar='fps', type=int,
+    parser.add_argument('fps', metavar='fps', type=float,
                        help='Frames per seconds')
 
     args = parser.parse_args()
