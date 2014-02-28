@@ -16,6 +16,7 @@ Requirements
  * ffmpeg
  * numpy
  * scipy
+ * colormath https://pypi.python.org/pypi/colormath
  
  Debian/Ubuntu/Mint
  ------------------
