@@ -17,12 +17,13 @@ Requirements
  * numpy
  * scipy
  * colormath https://pypi.python.org/pypi/colormath
+ * matplotlib
  
  Debian/Ubuntu/Mint
  ------------------
  
 ```
-apt-get install python-opencv ffmpeg build-essential checkinstall git cmake libfaac-dev libjack-jackd2-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libva-dev libvdpau-dev libvorbis-dev libx11-dev libxfixes-dev libxvidcore-dev texi2html yasm zlib1g-dev python-numpy python-scipy
+apt-get install python-opencv ffmpeg build-essential checkinstall git cmake libfaac-dev libjack-jackd2-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libva-dev libvdpau-dev libvorbis-dev libx11-dev libxfixes-dev libxvidcore-dev texi2html yasm zlib1g-dev python-numpy python-scipy python-matplotlib
 ```
 
 * gstreamer
