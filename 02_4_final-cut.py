@@ -25,6 +25,8 @@ def main():
 	#cv.Set(bg_img, (180))
 
 	files = sorted( glob.glob("*.png") )
+	print(files)
+
 	i = 0
 	while i < len(files):
 		file = files[i]
@@ -43,14 +45,23 @@ def main():
 		cv.ShowImage(win_name, img)
 
 		key = cv.WaitKey(0)
-		if key == 2555904: # right arrow
+		print(key)
+		if key in [2555904, 1113939]: # right arrow
 			i += 1
-		elif key == 2424832: # left arrow
+		elif key in [2424832, 1113937]: # left arrow
 			i -= 1
 			if i < 0:
 				i = 0
-		elif key == 27: # ESC
+		elif key in [27, 1048603]: # ESC
 			break
+		elif key in [1113941]: # page up
+			i -= 100
+			if i < 0:
+				i = 0
+		elif key in [1113942]: # page down
+			i += 100
+		else:
+			print("Unknown key code: {}".format(key))
 
 		cv.DestroyWindow(win_name)
 
