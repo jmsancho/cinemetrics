@@ -8,9 +8,10 @@ import os.path
 import xml.etree.ElementTree as et
 import utils
 
-DEBUG = True
+DEBUG = False
 #DEBUG = True
-DEBUG_INTERACTIVE = True
+DEBUG_INTERACTIVE = False
+#DEBUG_INTERACTIVE = True
 
 OUTPUT_DIR_NAME = "shot_snapshots"
 soundfile = "ton.wav"
