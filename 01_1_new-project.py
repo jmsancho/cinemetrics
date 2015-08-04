@@ -4,7 +4,7 @@ import sys
 import os
 import os.path
 import xml.etree.ElementTree as et
-import cv
+from .dependencies import cv
 
 PROJECTS_DIR_NAME = "projects"
 

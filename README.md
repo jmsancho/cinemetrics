@@ -5,8 +5,7 @@ This code is part of http://cinemetrics.fredericbrodbeck.de/
 
 Cinemetrics is about measuring and visualizing movie data, in order to reveal the characteristics of films and to create a visual "fingerprint" for them. Information such as the editing structure, color, speech or motion are extracted, analyzed and transformed into graphic representations so that movies can be seen as a whole and easily interpreted or compared side by side.
 
-At the moment these tools lack proper documentation, sorry.
-
+~~At the moment these tools lack proper documentation, sorry.~~ Expanding documentation.
 
 
 Requirements
@@ -19,7 +18,16 @@ Requirements
  * colormath https://pypi.python.org/pypi/colormath
  * matplotlib
  
- Debian/Ubuntu/Mint
+ -----------
+ # Installation
+ ## Mac (10.10 & Python 2.7.6)
+* Clone the repo to your local machine. 
+* Download dependencies 
+  * Working to add these as submodules so you should be able to get up and running faster. For a quick overview of submodules - http://blog.sourcetreeapp.com/2012/02/01/using-submodules-and-subrepositories/ - of course nothing is that easy...
+    * opencv: 
+    
+ 
+ ## Debian/Ubuntu/Mint
  ------------------
  
 ```
