@@ -6,7 +6,7 @@ import os.path
 import xml.etree.ElementTree as et
 import cv
 
-PROJECTS_DIR_NAME = "projects"
+PROJECTS_DIR_NAME = "vagrant-data"
 
 
 def main():
