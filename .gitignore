@@ -5,3 +5,4 @@ projects/
 
 # Vagrant files
 .vagrant
+vagrant-data
