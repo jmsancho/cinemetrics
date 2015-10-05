@@ -46,7 +46,8 @@ Vagrant.configure(2) do |cinemetrics|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  cinemetrics.vm.synced_folder "video-data", "/vagrant_data"
+  cinemetrics.vm.synced_folder "vagrant-data", "/vagrant-data",
+    owner: "root", group: "root"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -62,6 +63,8 @@ Vagrant.configure(2) do |cinemetrics|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+
+  cinemetrics.vm.provision "shell", path:"dependencies.sh"
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
