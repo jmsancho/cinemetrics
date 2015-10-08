@@ -46,19 +46,19 @@ def main():
 
 		key = cv.WaitKey(0)
 		print(key)
-		if key in [2555904, 1113939]: # right arrow
+		if key in [65363]: # right arrow
 			i += 1
-		elif key in [2424832, 1113937]: # left arrow
+		elif key in [65361]: # left arrow
 			i -= 1
 			if i < 0:
 				i = 0
 		elif key in [27, 1048603]: # ESC
 			break
-		elif key in [1113941]: # page up
+		elif key in [65365]: # page up
 			i -= 100
 			if i < 0:
 				i = 0
-		elif key in [1113942]: # page down
+		elif key in [65366]: # page down
 			i += 100
 		else:
 			print("Unknown key code: {}".format(key))
