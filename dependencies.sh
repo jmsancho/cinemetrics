@@ -15,3 +15,7 @@ apt-get -y install libgstreamer0.10-0 libgstreamer0.10-dev gstreamer0.10-tools g
 # install libjpg dependencies
 echo "Installing libjpg dependencies..."
 apt-get -y install libjpeg8 libjpeg8-dev
+
+# install missing items not listed on github
+echo "Installing yet more dependencies..."
+apt-get -y install imagemagick
