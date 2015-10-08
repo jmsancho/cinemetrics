@@ -18,4 +18,8 @@ apt-get -y install libjpeg8 libjpeg8-dev
 
 # install missing items not listed on github
 echo "Installing yet more dependencies..."
-apt-get -y install imagemagick
+apt-get -y install imagemagick python-pip
+
+# install colormath
+echo "Installing colormath..."
+sudo pip install colormath
