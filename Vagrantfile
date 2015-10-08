@@ -5,17 +5,17 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |cinemetrics|
+Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # vagrantup.com
 
   # Every Vagrant virtual environment requires a box to build off of.
-  cinemetrics.vm.box = "parallels/ubuntu-14.04"
+  config.vm.box = "parallels/ubuntu-14.04"
   
   # Fix issue around bad mount names with parallels
   # https://github.com/Parallels/vagrant-parallels/issues/124
-  cinemetrics.vm.provider "parallels" do |v|
+  config.vm.provider "parallels" do |v|
     v.customize ["set", :id, "--smart-mount", "off"]
   end
 
@@ -46,7 +46,7 @@ Vagrant.configure(2) do |cinemetrics|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  cinemetrics.vm.synced_folder "vagrant-data", "/vagrant-data",
+  config.vm.synced_folder "vagrant-data", "/vagrant-data",
     owner: "root", group: "root"
 
   # Provider-specific configuration so you can fine-tune various
@@ -64,7 +64,7 @@ Vagrant.configure(2) do |cinemetrics|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  cinemetrics.vm.provision "shell", path:"dependencies.sh"
+  config.vm.provision "shell", path:"dependencies.sh"
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
