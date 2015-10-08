@@ -11,17 +11,22 @@ import math
 #from lib import hls_sort
 
 
-from colormath.color_objects import HSLColor, RGBColor
+from colormath.color_objects import HSLColor, sRGBColor, LabColor
+from colormath.color_conversions import convert_color
+from colormath.color_diff import delta_e_cie2000
+
 def difference(a, b): # HLS
 	print(a, b)
 	#c1 = HSLColor(hsl_h = a[0], hsl_s = a[2]/100.0, hsl_l = a[1]/100.0)
 	#c2 = HSLColor(hsl_h = b[0], hsl_s = a[2]/100.0, hsl_l = a[1]/100.0)
-	c1 = RGBColor(a[0], a[1], a[2])
-	c2 = RGBColor(b[0], b[1], b[2])
+	c1RGB = sRGBColor(a[0], a[1], a[2])
+	c2RGB = sRGBColor(b[0], b[1], b[2])
+	c1Lab = convert_color(c1RGB, LabColor)
+	c2Lab = convert_color(c2RGB, LabColor)
 	#c1.convert_to('lab')
 	#c2.convert_to('lab')
-	print(c1.delta_e(c2))
-	return c1.delta_e(c2)
+	print(delta_e_cie2000(c1Lab, c2Lab))
+	return delta_e_cie2000(c1Lab, c2Lab)
 
 
 #import grapefruit
@@ -93,7 +98,7 @@ def main():
 				d[tuple(px)] = 1
 
 	colors = d.keys()
-	#print "%d pixels, %d colors" % (img_orig.width*img_orig.height, len(colors))
+	print "%d pixels, %d colors" % (img_orig.width*img_orig.height, len(colors))
 
 	print("sorting...")
 	#colors.sort(hls_sort)
