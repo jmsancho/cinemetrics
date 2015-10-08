@@ -7,6 +7,7 @@ import utils
 
 startframe = 0
 
+# This presents a window in X11 to review each image for inaccurate slitscans. Use left / right arrow to move between images.  
 
 def main():
 	global startframe
@@ -65,8 +66,9 @@ def main():
 
 		cv.DestroyWindow(win_name)
 
-	src_dir = os.path.dirname(sys.argv[0])
-	os.chdir(src_dir)
+	#print("System input arguments: " + sys.argv[0] + " " + sys.argv[1])
+	os.chdir("/vagrant") # Now that we're using Vagrant to wrapup everything, this should work to get to the root of the project directory
+	#os.system("ls -a")
 	os.system("python 02_2_save-shots.py \"" + sys.argv[1] + "\"")
 
 
