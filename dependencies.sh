@@ -18,7 +18,7 @@ apt-get -y install libjpeg8 libjpeg8-dev
 
 # install missing items not listed on github
 echo "Installing yet more dependencies..."
-apt-get -y install imagemagick python-pip sox
+apt-get -y install imagemagick python-pip sox python-nltk
 
 # install colormath
 echo "Installing colormath..."
