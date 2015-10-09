@@ -38,7 +38,7 @@ def main():
 	print bit, "bit" # usually: signed 16 bit [-32768, 32767]
 	f.close()
 
-	rate, data = scipy.io.wavfile.read(file)
+	rate, data = scipy.io.wavfile.read(file, mmap=True)
 	print rate, "hz"
 	# http://en.wikipedia.org/wiki/Sound_level_meter#Exponentially_averaging_sound_level_meter
 	chunk = rate / 8 #25
