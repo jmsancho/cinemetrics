@@ -43,10 +43,10 @@ def main():
 	# http://en.wikipedia.org/wiki/Sound_level_meter#Exponentially_averaging_sound_level_meter
 	chunk = rate / 8 #25
 
-	#print max(data)
-	#print min(data)
-
-	max = numpy.max( numpy.absolute(data) )
+	print numpy.max(data)
+	print numpy.min(data)
+	dataMax = numpy.max( numpy.absolute(data) )
+	print(dataMax)
 
 	"""fft = numpy.fft.rfft(data, chunk)
 	fft = numpy.absolute(fft)
@@ -61,7 +61,7 @@ def main():
 
 		# normalize [0, 1]
 		#values = values / 2**(bit-1)
-		values = values / float(max)
+		values = values / float(dataMax)
 
 		#values = values * float(1) # why do I need that?
 
@@ -72,6 +72,7 @@ def main():
 
 		# decibel
 		db = 20 * numpy.log10( (1e-20+rms) ) #/ float(max)
+		print(db)
 		data_db = numpy.append(data_db, db)
 
 	#plt.ylim(-60, 0)
