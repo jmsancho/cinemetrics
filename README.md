@@ -13,10 +13,7 @@ Cinemetrics is about measuring and visualizing movie data, in order to reveal th
 * Clone the repo to your local machine or grab the latest release.
 
 # Usage
-* Go to the repo folder in terminal 
-```
-vagrant up
-```
+* Go to the repo folder in terminal and vagrant up
     * That should run the provisioning shell script which will install (if everything goes according to plan...) all the necessary dependencies.
 * Place your video file inside the vagrant-data folder.
 * SSH into the Vagrant instance
