@@ -18,14 +18,16 @@ def main():
 
 	# os.chdir(path)
 	file = os.path.join(path, "audio.wav")
-	rate = scipy.io.wavfile.read(file)[0]
+	rate = scipy.io.wavfile.read(file, mmap=True)
 	print("{} hz".format(rate))
 
-	trim_from = int( (start_frame / fps) * rate )
-	trim_to   = int( (end_frame / fps) * rate )
-	os.system("sox audio.wav audio_trimmed.wav trim %ds %ds" % (trim_from, trim_to))
-	#print start_frame, end_frame
-	#print trim_from, trim_to
+	print(start_frame, fps, rate[0])
+	trim_from = int( (start_frame / fps) * rate[0] )
+	trim_to   = int( (end_frame / fps) * rate[0] )
+	os.system("sox ../audio.wav ../audio_trimmed.wav trim %ds %ds" % (trim_from, trim_to))
+	print start_frame, end_frame
+	print trim_from, trim_to
+	print ("Audio trim complete.")
 
 
 # #########################
