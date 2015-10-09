@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
   # https://github.com/Parallels/vagrant-parallels/issues/124
   config.vm.provider "parallels" do |v|
     v.customize ["set", :id, "--smart-mount", "off"]
+    v.memory = 1024 # Increase this if you start to get memory warnings. Like the descriptive "Killed" from Python.
   end
 
   # Disable automatic box update checking. If you disable this, then
