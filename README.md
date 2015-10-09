@@ -19,6 +19,14 @@ vagrant up
 ```
     * That should run the provisioning shell script which will install (if everything goes according to plan...) all the necessary dependencies.
 * Place your video file inside the vagrant-data folder.
+* SSH into the Vagrant instance
+```
+vagrant ssh
+```
+* cd to the main project folder
+```
+cd /vagrant
+```
 * With the your video file in place, work through each python file starting with 01_1_new-project.py. The syntax for your first command should look like:
 ```
 $ python 01_1_new-project.py vagrant-data/THE_NAME_OF_YOUR_VIDEO_FILE.mp4
