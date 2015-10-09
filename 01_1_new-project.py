@@ -48,7 +48,7 @@ def main():
 	#root.set("title", project_dir)
 	root.set("path", sys.argv[1])
 	#root.set("frames", str(frame_count))
-	#root.set("fps", str(fps))
+	root.set("fps", str(fps))
 	
 	# wrap and save
 	tree = et.ElementTree(root)
