@@ -19,6 +19,14 @@ Vagrant.configure(2) do |config|
     v.customize ["set", :id, "--smart-mount", "off"]
     v.memory = 1024 # Increase this if you start to get memory warnings. Like the descriptive "Killed" from Python.
   end
+  
+    config.vm.provider "virtualbox" do |v, override|
+    	override.vm.box = "ubuntu/trusty64"
+    	# Apparently VirtualBox needs a minimum of 1GB for MySQL to even run
+    	v.memory = 1024
+    	# VirtualBox needs a private IP address, otherwise you can't access it from the outside at all
+    	override.vm.network "private_network", type: "dhcp"
+    end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
