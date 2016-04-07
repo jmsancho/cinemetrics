@@ -10,20 +10,25 @@ Cinemetrics is about measuring and visualizing movie data, in order to reveal th
     * Fingers crossed, that's all you should need! The goal of this fork is to wrap all the dependencies needed for cinemetrics into a reusable, cross-platform Vagrantfile.
  
 # Installation
-* Clone the repo to your local machine or grab the latest release.
+* Clone the repo to your local machine or download the latest release.
 
 # Usage
 * Go to the repo folder in terminal and vagrant up
+```
+vagrant up
+```
     * That should run the provisioning shell script which will install (if everything goes according to plan...) all the necessary dependencies.
 * Place your video file inside the vagrant-data folder.
+![Finder example](examples/Finder_example.png)
 * SSH into the Vagrant instance
 ```
 vagrant ssh
 ```
-* cd to the main project folder
+* Vagrant starts in a default sub-folder, so you'll need to navigate out to the main project folder
 ```
-cd /vagrant
+cd ../../vagrant
 ```
+![Folder structure inside Vagrant](examples/Terminal_example.png)
 * With the your video file in place, work through each python file starting with 01_1_new-project.py. The syntax for your first command should look like:
 ```
 $ python 01_1_new-project.py vagrant-data/THE_NAME_OF_YOUR_VIDEO_FILE.mp4
